@@ -1,0 +1,24 @@
+<div class="w-3/4 mx-auto">
+    <form [formGroup]="checkOutForm" (ngSubmit)="checkoutApi()">
+        <div class="my-2">
+            <label for="">Details</label>
+            <input type="text" formControlName="details" class="w-full">
+        </div>
+
+
+        <div class="my-2">
+            <label for="">Phone</label>
+            <input type="text" formControlName="phone" class="w-full">
+        </div>
+
+
+
+        <div class="my-2">
+            <label for="">City</label>
+            <input type="text" formControlName="city" class="w-full">
+        </div>
+
+
+        <button class="btn-main w-full">Submit</button>
+    </form>
+</div>

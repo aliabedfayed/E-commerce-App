@@ -1,0 +1,58 @@
+<div class="w-1/3 mx-auto flex py-7">
+    <div class="w-1/2 main-img">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide> <img src="./assets/images/home-1.jpg" class="w-full" alt=""></ng-template>
+            <ng-template carouselSlide> <img src="./assets/images/home-4.jpg" class="w-full" alt=""></ng-template>
+        </owl-carousel-o>
+
+    </div>
+    <div class="w-1/2 secondary-img">
+        <img src="./assets/images/home-2.jpg" class="w-full" alt="">
+        <img src="./assets/images/home-3.jpg" class="w-full" alt="">
+    </div>
+</div>
+
+
+<div>
+    <owl-carousel-o [options]="categoryOptions">
+
+        @for (category of categoriesList; track $index) {
+        <ng-template carouselSlide [id]="category._id">
+            <img [src]="category.image" [alt]="category.name" [title]="category.name" class="w-100 h-72 cursor">
+            <h2>{{category.name}}</h2>
+        </ng-template>
+        }
+
+    </owl-carousel-o>
+</div>
+
+
+
+<div class="items-center flex">
+    <input type="text" [(ngModel)]="searchTerm" class="w-3/4 mx-auto my-9" placeholder="Search...">
+</div>
+
+<div class="flex w-10/12 mx-auto flex-wrap py-7">
+    @for (product of productList | filter : searchTerm; track $index) {
+    <div class="w-1/4 p-2" [title]="product.title">
+        <div class="product p-3 flex flex-col justify-between">
+            <div [routerLink]="['/productDetails' , product._id]">
+                <img [src]="product.imageCover" class="w-full" alt="">
+                <h3 class="text-main">{{product.category.name}}</h3>
+                <h2>{{product.title.split(" ",3).join(" ")}}</h2>
+                <div class="flex justify-between">
+                    <span>{{product.price | currency: 'EGP'}}</span>
+                    <span>{{product.ratingsAverage}}
+                        <i class="fa-solid fa-star rating-color"></i>
+                    </span>
+                </div>
+            </div>
+
+
+            <button class="btn-main w-full" (click)="addProduct(product._id)">
+                @if (isLoading) {<i class="fa fa-spin fa-spinner"></i>}
+                Add product</button>
+        </div>
+    </div>
+    }
+</div>

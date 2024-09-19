@@ -1,0 +1,39 @@
+<div class="w-3/4 mx-auto">
+    <h2 class="text-main text-4xl font-bold">Shop Cart</h2>
+
+
+    @if (myCart?.data?.products?.length !==0) {
+    <h5 class="py-5">Total price: <span class="text-main font-bold">{{myCart?.data?.totalCartPrice | currency:
+            'EGP'}}</span></h5>
+    <button class="btn-main" [routerLink]="['/checkout',myCart?.cartId]">payment</button>
+
+    <button class="btn-main" (click)="clearCart()">Clear cart</button>
+
+    }
+
+    @for (product of myCart?.data?.products ; track $index) {
+    <div class="flex flex-wrap py-5">
+        <div class="w-2/12">
+            <img [src]="product.product.imageCover" class="w-full" [alt]="product.product.title">
+        </div>
+
+        <div class="w-7/12 flex flex-col justify-center">
+            <h2>{{product.product.title}}</h2>
+            <span>Price: <span class="text-main font-bold"> {{product.price|currency:'EGP'}}</span></span> <br>
+            <i class="fa-solid fa-trash text-red-500 cursor-pointer" (click)="removeItem(product.product._id)">
+                remove</i>
+        </div>
+
+        <div class="w-3/12 flex gap-4 items-center">
+            <i class="fa-solid fa-plus-circle cursor-pointer"
+                (click)="updateQuantity(product.product._id,product.count+1)"></i>
+            <span>{{product.count}}</span>
+            <i class="fa-solid fa-minus-circle cursor-pointer"
+                (click)="updateQuantity(product.product._id,product.count-1)"></i>
+        </div>
+    </div>
+    }
+    @empty {
+    <img src="./assets/images/images.png" alt="">
+    }
+</div>

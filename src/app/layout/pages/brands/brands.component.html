@@ -1,0 +1,16 @@
+<h1 class="text-main text-center text-4xl py-5 font-bold">All Brands</h1>
+<div class="w-10/12 mx-auto flex flex-wrap">
+
+
+    @for (brand of brandsList; track $index) {
+    <div class="w-1/4 p-5">
+        <div class="product">
+            <img [src]='brand.image' class="w-full" alt="">
+            <h2 class="text-center p-8">{{brand.name}}</h2>
+        </div>
+    </div>
+    }
+
+
+
+</div>
